@@ -29,19 +29,23 @@ namespace Match3
         private SpriteRenderer _sprite;
         private Dictionary<ColorType, Sprite> _colorSpriteDict;
 
-        [SerializeField]
-        string m_yellowFishSpriteAddress;
-        private AsyncOperationHandle<Sprite> m_FishLoadOpHandle;
+        // Addressable asset loading
+        private List<string> m_AssetLabels = new List<string>() {"Fish_Icons"};
+        private AsyncOperationHandle<IList<Sprite>> m_FishesLoadOpHandle;
+        private Dictionary<string, ColorType> m_FishAssetNameColorPairs = new Dictionary<string, ColorType>
+        {
+            { Constants.Addressables.yellowFishAssetName, ColorType.Yellow },
+            { Constants.Addressables.purpleFishAssetName, ColorType.Purple }
+        };
 
         private void OnEnable()
         {
-            m_FishLoadOpHandle = Addressables.LoadAssetAsync<Sprite>(m_yellowFishSpriteAddress);
-            m_FishLoadOpHandle.Completed += OnFishSpriteLoadComplete;
+            LoadFishSprites();
         }
 
         private void OnDisable()
         {
-            m_FishLoadOpHandle.Completed -= OnFishSpriteLoadComplete;
+            m_FishesLoadOpHandle.Completed -= OnFishSpritesLoadComplete;
         }
 
         private void Awake()
@@ -78,21 +82,44 @@ namespace Match3
         {
             _color = newColor;
 
-            if (_colorSpriteDict.ContainsKey(newColor))
-            {
-                _sprite.sprite = _colorSpriteDict[newColor];
-            }
+            UpdateSpritewrtColor();
         }
 
-        void OnFishSpriteLoadComplete(AsyncOperationHandle<Sprite> asyncOperationHandle)
+        void LoadFishSprites()
         {
-            for(int i = 0; i < NumColors; i++)
+            m_FishesLoadOpHandle = Addressables.LoadAssetsAsync<Sprite>(m_AssetLabels, null, Addressables.MergeMode.Union);
+            m_FishesLoadOpHandle.Completed += OnFishSpritesLoadComplete;
+        }
+
+        void OnFishSpritesLoadComplete(AsyncOperationHandle<IList<Sprite>> asyncOperationHandle)
+        {
+            Debug.Log("OnFishSpritesLoad Status: " + asyncOperationHandle.Status);
+
+            if (asyncOperationHandle.Status == AsyncOperationStatus.Succeeded)
             {
-                if(colorSprites[i].color == ColorType.Yellow) {
-                    colorSprites[i].sprite = asyncOperationHandle.Result;
+                IList<Sprite> results = asyncOperationHandle.Result;
+                for (int i = 0; i < results.Count; i++)
+                {
+                    string loadedSpriteName = results[i].name;
+                    ColorType respectiveColor = m_FishAssetNameColorPairs[loadedSpriteName];
+
+                    if (respectiveColor == ColorType.Any || _colorSpriteDict == null)
+                    {
+                        continue;
+                    }
+                    if (!_colorSpriteDict.ContainsKey(respectiveColor))
+                    {
+                        _colorSpriteDict.Add(respectiveColor, results[i]);
+                    }
+                    else
+                    {
+                        _colorSpriteDict[respectiveColor] = results[i];
+                    }
                 }
             }
-            UpdateColorSpriteDict();
+
+            UpdateSpritewrtColor();
+
         }
     }
 }
