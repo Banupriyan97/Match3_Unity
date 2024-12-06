@@ -17,17 +17,10 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 171869c659e2b404f8768602d340fd85
   m_SerializeEntries:
-  - m_GUID: b7a68c654b9c3a44c9d3df16fa71210c
-    m_Address: Fish_yellow
+  - m_GUID: d2049f97c0c1429408fdf67d3a2e51cd
+    m_Address: Assets/Textures/Sprites/fish_3.png
     m_ReadOnly: 0
-    m_SerializedLabels:
-    - Fish_Icons
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 87f999246d3fddf45ba4e81ba09f33b0
-    m_Address: Fish_purple
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Fish_Icons
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 0cdc7b69f1b3a4f6e9866d7ec6d49b50, type: 2}

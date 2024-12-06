@@ -15,9 +15,9 @@ MonoBehaviour:
   m_DefaultGroup: ef63ec24403844e95bedefa6d9c37feb
   m_currentHash:
     serializedVersion: 2
-    Hash: 61950c9bb19405c983c99c027d3c081a
+    Hash: 2985f7f4fd08c33705e75f12be70500a
   m_OptimizeCatalogSize: 0
-  m_BuildRemoteCatalog: 0
+  m_BuildRemoteCatalog: 1
   m_BundleLocalCatalog: 0
   m_CatalogRequestsTimeout: 0
   m_DisableCatalogUpdateOnStart: 0
@@ -35,9 +35,9 @@ MonoBehaviour:
   m_CheckForContentUpdateRestrictionsOption: 0
   m_MonoScriptBundleCustomNaming: 
   m_RemoteCatalogBuildPath:
-    m_Id: 
+    m_Id: d97660307beac402a87bb9ab387d592a
   m_RemoteCatalogLoadPath:
-    m_Id: 
+    m_Id: 51503bcdf230542d7bbdf10624149bcb
   m_ContentStateBuildPathProfileVariableName: <default settings path>
   m_CustomContentStateBuildPath: 
   m_ContentStateBuildPath: 
@@ -86,7 +86,7 @@ MonoBehaviour:
       - m_Id: d97660307beac402a87bb9ab387d592a
         m_Value: ServerData/[BuildTarget]
       - m_Id: 51503bcdf230542d7bbdf10624149bcb
-        m_Value: https://unity.com/{UnityEditor.PlayerSettings.productName}/[RemoteHost]_[BuildTarget]
+        m_Value: https://match3-unity-hosting-5d1a0.web.app/[BuildTarget]
     - m_InheritedParent: 
       m_Id: eba11ae266bb04bc78b84d82009a5f1d
       m_ProfileName: Test
